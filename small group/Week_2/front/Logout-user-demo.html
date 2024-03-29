@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout-user-demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        .logout {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            border: 1px solid #ccc;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div class="logout">
+        <h2>Logout user</h2>
+        <p>Please enter your username and password to logout your account</p>
+        <label for="username">Username:</label>
+        <input type="text" id="username">
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password">
+        <br>
+        <button onclick="logout()">Logout</button>
+        <br>
+        <a href="Login-Demo.html">Back</a>
+    </div>
+</body>
+<script>
+    function logout() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        data = { "username": username, "reset password": password };
+
+        axios.post('http://localhost:8080/logout', JSON.stringify(data))
+            .then(response => {
+                alert(response.data);
+                //console.log(response.data);
+            })
+            .catch(error => {
+                alert("Failed to logout user! Please try again!");
+            });
+    }
+</script>
+
+</html>

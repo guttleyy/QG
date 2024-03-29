@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login-Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        .login {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            border: 1px solid #ccc;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login">
+        <h2>Login</h2>
+        <label for="username">Username:</label>
+        <input type="text" id="username">
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password">
+        <br>
+        <button onclick="login()">Login</button>
+        <button onclick="register()">Register</button>
+        <!-- <button onclick="forgotPassword()">Forgot Password</button> -->
+        <br>
+        <a href="Reset-password-demo.html">Forgot Password</a>
+        <br>
+        <a href="Logout-user-demo.html">Logout user</a>
+    </div>
+
+
+</body>
+<script>
+    function login() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        data = { "username": username, "password": password };
+
+        axios.post('http://localhost:8080/login', JSON.stringify(data))
+            .then(response => {
+                alert(response.data);
+                //console.log(response.data);
+            })
+            .catch(error => {
+                alert("Failed to login! Please try again!");
+            });
+    }
+
+    function register() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        data = { "username": username, "password": password };
+
+        axios.post('http://localhost:8080/register', JSON.stringify(data))
+            .then(response => {
+                alert(response.data);
+                //console.log(response.data);
+            })
+            .catch(error => {
+                alert("Failed to register User! Please try again!");
+            });
+    }
+</script>
+
+</html>
