@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.js"></script>
+
+    <style>
+        .login {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login">
+        <h2>登 录</h2>
+        <form id="LoginForm">
+            <label>用户名:</label>
+            <input type="text" name="username"><br>
+            <label>密&emsp;码:</label>
+            <input type="password" name="password"><br>
+            <br>
+            <button id="btn" type="button">登录</button>
+            <a href="Register.html">点击注册</a>
+        </form>
+    </div>
+</body>
+<script>
+    $(function(){
+        $("#btn").click(function(){
+            $.ajax({
+                type:'post',
+                url:'http://localhost:8080/qg_war/login',
+                data:$("#LoginForm").serialize(),
+                dataType:'json',
+                // /text/jsonp/xml/javascript',
+                success:function(data){
+                    alert(data.msg);
+                    if(data.status == 200){
+                        window.location.href = "index.html";
+                    }
+                },
+                error:function(){
+                    alert("登录失败，请重试!");
+                }
+            })
+        })
+    })
+</script>
+</html>

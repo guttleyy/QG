@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+    <script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.js"></script>
+
+    <style>
+        .register {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="register">
+        <h2>注 册</h2>
+        <form id="RegisterForm">
+            <label>用户名:</label>
+            <input type="text" name="username"><br>
+            <label>密&emsp;码:</label>
+            <input type="password" name="password"><br>
+            <label>邮&emsp;箱:</label>
+            <input type="email" name="email"><br>
+            <br>
+            <button id="btn" type="button">注册</button>
+            <a href="Login.html">已有用户？点击登录</a>
+        </form>
+    </div>
+</body>
+<script>
+    $(function(){
+        $("#btn").click(function(){
+            $.ajax({
+                type:'post',
+                url:'http://localhost:8080/qg_war/register',
+                data:$("#RegisterForm").serialize(),
+                dataType:'json',
+                // /text/jsonp/xml/javascript',
+                success:function(data){
+                    alert(data.msg);
+                    if(data.status == 200){
+                        window.location.href = "Login.html";
+                    }
+                },
+                error:function(){
+                    alert("注册失败，请输入正确用户名或密码或邮箱!");
+                }
+            })
+        })
+    })
+</script>
+</html>
