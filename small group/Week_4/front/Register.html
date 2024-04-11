@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+    <script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.js"></script>
+
+    <style>
+        .register {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+        label{
+            position: absolute;
+            left: 20%;
+        }
+        input{
+            position: absolute;
+            left: 40%;
+        }
+        h2{
+            text-align: center;
+        }
+        #btn{
+            width: 300px;
+			height:35px;
+			margin:0 auto;
+        }
+        #a1{
+            position: absolute;
+            left: 45%;
+            top: 92%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="register">
+        <h2>注 册</h2>
+        <form id="RegisterForm">
+            <label>用户名:</label>
+            <input type="text" name="username"><br>
+            <br>
+            <label>密&emsp;码:</label>
+            <input type="password" name="password"><br>
+            <br>
+            <label>邮&emsp;箱:</label>
+            <input type="email" name="email"><br>
+            <br>
+            <button id="btn" type="button">注册</button>
+            <a href="Login.html" id="a1">已有用户？点击登录</a>
+        </form>
+    </div>
+</body>
+<script>
+    $(function(){
+        $("#btn").click(function(){
+            $.ajax({
+                type:'post',
+                url:'http://localhost:8080/rear_war/user/register',
+                data:$("#RegisterForm").serialize(),
+                dataType:'json',
+                success:function(data){
+                    alert(data.msg);
+                    if(data.status === 200){
+                        window.location.href = "Login.html";
+                    }
+                },
+                error:function(){
+                    alert("注册失败，请输入正确用户名或密码或邮箱!");
+                }
+            })
+        })
+    })
+</script>
+</html>

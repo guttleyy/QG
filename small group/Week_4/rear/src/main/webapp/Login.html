@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.js"></script>
+
+    <style>
+        .login {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 30px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            
+        }
+        label{
+            position: absolute;
+            left: 20%;
+        }
+        input{
+            position: absolute;
+            left: 40%;
+        }
+        h2{
+            text-align: center;
+        }
+        #btn{
+            width: 300px;
+			height:35px;
+			margin:0 auto;
+        }
+        #a1{
+            position: absolute;
+            left: 25%;
+            top: 90%;
+        }
+        /* #a2{
+            position: absolute;
+            left: 55%;
+            top: 90%;
+        } */
+    </style>
+</head>
+
+<body>
+    <div class="login">
+        <h2>登 录</h2>
+        <form id="LoginForm">
+            <label>用户名:</label>
+            <input type="text" name="username">
+            <br><br>
+            <label>密&emsp;码:</label>
+            <input type="password" name="password">
+            <br><br>
+            <div id="btn">
+                <button id="btn" type="button">登录</button>
+                <a href="Register.html" id="a1">点击注册</a>
+                <!-- <a href="Forget.html" id="a2">忘记密码</a> -->
+            </div>
+            
+        </form>
+    </div>
+</body>
+<script>
+    $(function(){
+        $("#btn").click(function(){
+            $.ajax({
+                type:'post',
+                url:'http://localhost:8080/rear_war/user/login',
+                data:$("#LoginForm").serialize(),
+                dataType:'json',
+                success:function(data){
+                    alert(data.msg);
+                    if(data.status === 200){
+                        window.location.href = "index.html";
+                    }
+                },
+                error:function(){
+                    alert("登录失败，请重试!");
+                }
+            })
+        })
+    })
+</script>
+</html>
